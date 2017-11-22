@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+message Combo {
+	repeated Action actions = 1;
+	string starting_position = 2;
+}
+
+message Action {
+	oneof action_oneof {
+		Attack attack = 1;
+		Movement movement = 2;
+		Transition transition = 3;
+	}
+}
+
+message Attack {
+	string id = 1;
+	string display_name = 2;
+	string shorthand = 3;
+	string longhand = 4;
+	repeated uint32 hits = 5;
+	uint32 num_hits = 6;
+	Input input = 7;
+	bool fast_fall = 8;
+	bool kara = 9;
+	bool tiger_knee = 10;
+}
+
+message Movement {
+	string id = 1;
+	string display_name = 2;
+	string shorthand = 3;
+	string longhand = 4;
+}
+
+message Transition {
+	string id = 1;
+	string display_name = 2;
+	string shorthand = 3;
+	string longhand = 4;
+	Precision precision = 5;
+	uint32 window = 6;
+}
+
+enum Precision {
+	UNSPECIFIED = 0;
+	EXACT = 1;
+	APPROXIMATE = 2;
+}
+
+message Input {
+	Motion motion = 1;
+	string motion_notation = 2;
+	Button button = 3;
+	PressDuration press_duration = 4;
+}
+
+enum Motion {
+	NEUTRAL = 0;
+	DOWN = 1;
+	DOWN_BACK = 2;
+	BACK = 3;
+	UP_BACK = 4;
+	UP = 5;
+	UP_FORWARD = 6;
+	FORWARD = 7;
+	DOWN_FORWARD = 8;
+	QCF = 9;
+	HCF = 10;
+	QCB = 11;
+	HCB = 12;
+	DP = 13;
+	REVERSE_DP = 14;
+	SONIC_BOOM = 15;
+	FLASH_KICK = 16;
+	THREE_SIXTY = 17;
+	SEVEN_TWENTY = 18;
+	TEN_EIGHTY = 19;
+	DOWN_DOWN = 20;
+}
+
+message Button {
+	string display_name = 1;
+	string shorthand = 2;
+	uint32 order = 3;
+}
+
+enum PressDuration {
+	PRESS = 0;
+	HOLD = 1;
+	RELEASE = 2;
+}
